@@ -7,7 +7,7 @@ int main() {
     double x, y;
 
     
-    cout << "¬ведите x: ";
+    cout << "x: ";
     cin >> x;
 
    
