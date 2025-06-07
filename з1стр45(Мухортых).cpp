@@ -1,82 +1,31 @@
 #include <iostream>
-#include <cmath>
-#include <ctime>
-
-class ArrayProcessor {
-private:
-    int* arr; 
-    int size;
-
-    
-    void initializeArray() {
-        for (int i = 0; i < size; i++) {
-            arr[i] = rand() % 101 - 50; 
-        }
-    }
-
-public:
-    // Конструктор
-    ArrayProcessor(int n) : size(n) {
-        arr = new int[size];
-        srand(time(0)); 
-        initializeArray();
-    }
-
-    // Деструктор для освобождения памяти
-    ~ArrayProcessor() {
-        delete[] arr;
-    }
-
-    // Вычисление суммы
-    double calculateSum() {
-        double sum = 0;
-        for (int i = 0; i < size; i++) {
-            sum += arr[i];
-        }
-        return sum;
-    }
-
-    // Вычисление среднего арифметического
-    double calculateAverage() {
-        return calculateSum() / size;
-    }
-
-    // Вывод массива
-    void printArray() {
-        std::cout << "Массив: ";
-        for (int i = 0; i < size; i++) {
-            std::cout << arr[i] << " ";
-        }
-        std::cout << std::endl;
-    }
-};
+using namespace std;
 
 int main() {
-    int N;
+    int rows, cols;
+    cout << "Введите количество строк и столбцов: ";
+    cin >> rows >> cols;
 
-    // Диалог с пользователем
-    std::cout << "Введите трёхзначное число N: ";
-    std::cin >> N;
+    int array[100][100]; // Предполагаем, что размер не больше 100x100
 
-    // Проверка на трёхзначное число
-    if (N < 100 || N > 999) {
-        std::cout << "Ошибка" << std::endl;
-        return 1;
-    }
+    // Ввод элементов массива
+    cout << "Введите элементы массива:\n";
+    for (int i = 0; i < rows; ++i)
+        for (int j = 0; j < cols; ++j)
+            cin >> array[i][j];
 
-    // Создание объекта класса
-    ArrayProcessor processor(N);
+    int number, count = 0;
+    cout << "Введите число: ";
+    cin >> number;
 
-    // Вывод массива
-    processor.printArray();
+    // Проверка условий и вывод
+    for (int i = 0; i < rows; ++i)
+        for (int j = 0; j < cols; ++j)
+            if (array[i][j] > number && (i + j) % 3 == 0) {
+                cout << "Элемент " << array[i][j] << " на позиции [" << i << "][" << j << "]\n";
+                ++count;
+            }
 
-    // Вычисление и вывод суммы
-    double sum = processor.calculateSum();
-    std::cout << "Сумма элементов: " << sum << std::endl;
-
-    // Вычисление и вывод среднего арифметического
-    double average = processor.calculateAverage();
-    std::cout << "Среднее арифметическое: " << average << std::endl;
-
+    cout << "Всего подходящих элементов: " << count << endl;
     return 0;
 }
