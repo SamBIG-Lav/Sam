@@ -28,12 +28,8 @@ int main() {
     y = sqrt(arccos3 + log3_val);
 
  
-    cout << "y("<< x << ") = " << y << endl;
-     if (y >= 0 and y <= 5) {    
+    cout << y << endl;
     cout << "true" << endl;
-}
- else{
-     cout <<"False"<< endl;
- }
+
     return 0;
 }
