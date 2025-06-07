@@ -1,31 +1,38 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 int main() {
+    srand(time(0));
+
     int rows, cols;
-    cout << "Введите количество строк и столбцов: ";
+    cout << "Введите количество строк и столбцов (например: 3 4): ";
     cin >> rows >> cols;
 
-    int array[100][100]; // Предполагаем, что размер не больше 100x100
+    int array[100][100];
 
-    // Ввод элементов массива
-    cout << "Введите элементы массива:\n";
-    for (int i = 0; i < rows; ++i)
-        for (int j = 0; j < cols; ++j)
-            cin >> array[i][j];
+    cout << "\nСлучайный массив:\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            array[i][j] = rand() % 101 - 50;
+            cout << array[i][j] << "\t";
+        }
+        cout << endl;
+    }
 
     int number, count = 0;
-    cout << "Введите число: ";
+    cout << "\nВведите число: ";
     cin >> number;
 
-    // Проверка условий и вывод
+    cout << "\nПодходящие элементы (больше " << number << " и сумма индексов кратна 3):\n";
     for (int i = 0; i < rows; ++i)
         for (int j = 0; j < cols; ++j)
             if (array[i][j] > number && (i + j) % 3 == 0) {
-                cout << "Элемент " << array[i][j] << " на позиции [" << i << "][" << j << "]\n";
-                ++count;
+                cout << "Значение " << array[i][j] << " на позиции [" << i << "][" << j << "]\n";
+                count++;
             }
 
-    cout << "Всего подходящих элементов: " << count << endl;
+    cout << "Всего таких элементов: " << count << "\n";
     return 0;
 }
